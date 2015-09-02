@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Manage customers</ui:define>
+		<ui:define name="content">
+			#{manageCustomersBean.updateCustomersList()}
+			
+			<h2>Manage customers prepayments</h2>
+
+			<h:dataTable value="#{manageCustomersBean.customersList}" var="customer"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Name</f:facet> 
+					#{customer.name} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Surname</f:facet> 
+					#{customer.surname} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Email</f:facet> 
+					#{customer.email} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Telephone</f:facet> 
+					#{customer.telephone} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Prepayment</f:facet> 
+					#{customer.prepaymentPercent}% 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Edit" 
+							action="#{manageCustomersBean.editCustomer(customer)}" />
+					</h:form>
+				</h:column>				
+				
+			</h:dataTable>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Total report</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="content">	
+		
+			<h2>Get reports</h2>	
+		
+			<ul class="sub-menu">
+				<li>Total report</li>
+				<li><h:link value="Report by fish" outcome="/gm/reportByFish" /></li>
+				<li><h:link value="Report by date" outcome="/gm/reportByDate" /></li>			
+			</ul>			
+
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputText value="Date since (dd.MM.yyyy): " />
+					<h:inputText id="dc" value="#{reportBean.dateSince}"
+						converterMessage="#{msgs.dateFormatInvalid}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="dc" />
+					
+					<h:outputText value="Date to (dd.MM.yyyy): " />
+					<h:inputText id="dt" value="#{reportBean.dateTo}"
+						converterMessage="#{msgs.dateFormatInvalid}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="dt" />					
+				</h:panelGrid>
+				<h:commandButton value="Get report" action="#{reportBean.updateTotalReport()}"/>
+			</h:form>
+			<br/>
+			<h:dataTable value="#{reportBean.reportList}" var="result" 
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow"
+				rendered="#{!reportBean.reportList.isEmpty()}">
+
+				<h:column>
+					<f:facet name="header">Total weight</f:facet> 
+					#{result.weight} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Total income</f:facet> 
+					#{result.income} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Total profit</f:facet> 
+					#{result.profit} 
+				</h:column>
+				
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

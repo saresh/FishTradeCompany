@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Manage expected fish</ui:define>
+		<ui:define name="content">
+			#{manageFishItemsBean.updateExpectedFishList()}			
+			
+			<ul class="sub-menu">
+				<li><h:link value="Received fish" outcome="/gm/manageReceivedFish"/></li>
+				<li>Expected fish</li>
+			</ul>
+			
+			
+
+			<h:dataTable value="#{manageFishItemsBean.expectedFishList}" var="fishItem"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Name</f:facet> 
+					#{fishItem.name} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Description</f:facet> 
+					#{fishItem.description} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Price for ton</f:facet> 
+					#{fishItem.price} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{fishItem.quantity} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Price paid for</f:facet> 
+					#{fishItem.pricePaidFor} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Quantity bought</f:facet> 
+					#{fishItem.quantityBought} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Provider</f:facet> 
+					#{fishItem.providerParcel.provider.name}										
+				</h:column>				
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Edit" 
+							action="#{manageFishItemsBean.editFishItem(fishItem)}" />
+					</h:form>
+				</h:column>				
+
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

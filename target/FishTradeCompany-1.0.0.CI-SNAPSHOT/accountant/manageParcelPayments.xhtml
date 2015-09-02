@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Add payments to parcels</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="content">
+			#{accountantBean.updatePendingPaymentsList()}
+			
+			<h2>Pending payments</h2>
+			
+			<h:dataTable value="#{accountantBean.pendingPayments}" var="parcel"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Id</f:facet> 
+					#{parcel.id} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Customer</f:facet> 
+					#{parcel.customer.name} #{parcel.customer.surname} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Status</f:facet> 
+					#{parcel.status} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Total price</f:facet> 
+					#{parcel.getTotalPrice()} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Paid</f:facet> 
+					#{parcel.getTotalPaymentsAmount()} 
+				</h:column>	
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Add payment" 
+							action="#{accountantBean.addPayment(parcel)}" />
+					</h:form>
+				</h:column>
+				
+				
+
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

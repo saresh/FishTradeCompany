@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Fish for sale</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="content">
+			#{purchaseBean.updateFishList()}
+			
+			<h2>Avaliable fish for sale</h2>
+			
+			<h:dataTable value="#{purchaseBean.fishList}" var="fishItem"
+				styleClass="table" headerClass="tableHeader"
+					rowClasses="tableRow, tableRow">
+					
+				<h:column>
+					<f:facet name="header">Name</f:facet> 
+					#{fishItem.name} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Description</f:facet> 
+					#{fishItem.description} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Provider</f:facet> 
+					#{fishItem.providerParcel.provider.name} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{fishItem.quantity} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Price / ton</f:facet> 
+					#{fishItem.price} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"></f:facet> 
+					<h:form>
+						<h:inputText id="quantToBuy" value="#{purchaseBean.quantitySelected}" maxlength="3" 
+							required="true" requiredMessage="#{msgs.regFieldRequired}" 
+							validatorMessage="#{msgs.fishQuantityInvalid}">
+							<f:validateLongRange minimum="1"/>							
+							<f:convertNumber/>
+						</h:inputText>
+						<h:commandButton value="Add to cart" action="#{purchaseBean.addToCart(fishItem.id)}" /> <br/>
+						<h:message for="quantToBuy" styleClass="error-message"/>
+					</h:form> 
+				</h:column>
+					
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

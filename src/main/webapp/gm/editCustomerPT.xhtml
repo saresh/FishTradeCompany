@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Edit prepayment</ui:define>
+		<ui:define name="content">
+			<h2>Set prepayment type</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputText value="Name: "/>
+					<h:outputText value="#{manageCustomersBean.customerToEdit.name}"/>
+					<h:outputText/>
+					
+					<h:outputText value="Surname: "/>
+					<h:outputText value="#{manageCustomersBean.customerToEdit.surname}"/>
+					<h:outputText/>
+										
+					<h:outputText value="Prepayment type: "/>
+					<h:inputText id="newPT" value="#{manageCustomersBean.customerToEdit.prepaymentPercent}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.customerPrepaymentTypeInvalid}">
+						<f:validateLongRange minimum="0" maximum="100"/>
+					</h:inputText>
+					<h:message for="newPT"/>
+
+				</h:panelGrid>
+				<h:commandButton value="Save" action="#{manageCustomersBean.updateCustomer()}"/>
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

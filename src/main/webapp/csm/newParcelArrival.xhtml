@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">New arrival</ui:define>
+		<ui:define name="content">
+		#{fishArrivalBean.updateProvidersList()}
+			<h2>Register provider parcel arrival</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+
+					<h:outputText value="Provider: " />
+					<h:selectOneMenu id="pid" value="#{fishArrivalBean.providerParcelId}">
+						<f:selectItems value="#{fishArrivalBean.fishProviders}" />
+					</h:selectOneMenu>
+					<h:message for="pid" />
+
+					<h:outputText value="Date of arrival (dd.MM.yyyy): " />
+					<h:inputText id="pDate" value="#{fishArrivalBean.dateArrival}"
+						converterMessage="#{msgs.dateFormatInvalid}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="pDate" />
+
+				</h:panelGrid>
+				<h:commandButton value="Register"
+					action="#{fishArrivalBean.saveProviderParcelArrival()}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

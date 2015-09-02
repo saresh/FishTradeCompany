@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">New payment</ui:define>
+		<ui:define name="content">
+			<h2>Register new payment</h2>
+			
+			<h:form>
+				<h:panelGrid columns="3">						
+
+					<h:outputText value="Parcel id: " />
+					<h:outputText value="#{accountantBean.parcelForPayment.id}" >						
+					</h:outputText>
+					<h:message for="" />
+
+					<h:outputText value="Customer: " />
+					<h:outputText value="#{accountantBean.parcelForPayment.customer.name} #{accountantBean.parcelForPayment.customer.surname}" >						
+					</h:outputText>
+					<h:message for="" />
+
+					<h:outputText value="Amount paid: " />
+					<h:inputText id="pAmount" value="#{accountantBean.amountPaid}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}">
+						<f:convertNumber />
+					</h:inputText>
+					<h:message for="pAmount" />					
+
+				</h:panelGrid>
+				<h:commandButton value="Save"
+					action="#{accountantBean.savePayment(staffLoginBean.staff.id)}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

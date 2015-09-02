@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+	<ui:composition>
+		<div class="header">
+			<div class="header-row">
+				<div class="logo-holder">
+					<img src="../resources/img/logo2.png" class="logo" />
+				</div>
+				<div class="menu-holder">
+					<ul class="main-menu">
+						<li><h:link value="Fish For Sale" outcome="/customer/fishForSale" /></li>
+						<ui:fragment rendered="#{customerLoginBean.customer != null}">
+							<li><h:link value="My Parcels" outcome="/customer/customerParcels" /></li>
+						</ui:fragment>
+					</ul>
+				</div>
+				<div class="cart">
+					<img src="../resources/img/cart.png" />
+					<h:link value="Cart" outcome="/customer/cart" />
+					<br />
+					<span>Items: #{purchaseBean.cart.size()}</span> 
+					<br /> 
+					<span>Weight: #{purchaseBean.getTotalWeight()} t.</span>
+					<br /> 
+					<span>Price: $#{purchaseBean.getTotalPrice()}</span> 
+					<br />
+
+
+				</div>
+				<div class="user-holder">
+					<h:form rendered="#{customerLoginBean.user != null}">
+						You are logged as #{customerLoginBean.username}
+						<br /><br/>
+						<h:commandLink value="Logout" action="#{customerLoginBean.logout}"/>
+					</h:form>
+
+					<h:form rendered="#{customerLoginBean.user == null}">						
+						
+						<h:link value="Log In" outcome="/customer/customerLogin" />
+						<br/><br/> 
+						<h:link value="Sign up" outcome="/customer/signup" />
+					</h:form>
+				</div>
+
+
+			</div>
+		</div>
+	</ui:composition>
+
+</h:body>
+</html>

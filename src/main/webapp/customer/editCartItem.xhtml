@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Edit cart item</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="title">Edit cart item</ui:define>
+		<ui:define name="content">
+			<h2>Edit cart item</h2>
+		
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputText value="Fish: "/>
+					<h:outputText value="#{purchaseBean.itemToEdit.fishItem.name}"/>
+					<h:outputText/>
+					
+					<h:outputText value="Description: "/>
+					<h:outputText value="#{purchaseBean.itemToEdit.fishItem.description}"/>
+					<h:outputText/>
+					
+					<h:outputText value="Price: "/>
+					<h:outputText value="#{purchaseBean.itemToEdit.price}"/>
+					<h:outputText/>
+					
+					<h:outputText value="Quantity: "/>
+					<h:inputText id="newQ" value="#{purchaseBean.itemToEdit.quantity}" required="true"
+						validatorMessage="#{msgs.fishQuantityInvalid}">
+						<f:validateLongRange minimum="1" maximum="#{purchaseBean.itemToEdit.fishItem.quantity}"/>
+					</h:inputText>
+					<h:message for="newQ"/>
+
+				</h:panelGrid>
+				<h:commandButton value="Save" action="#{purchaseBean.updateCartItem()}"/>
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

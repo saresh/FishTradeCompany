@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Home page</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="content">
+			<h2>Register new provider</h2>
+			<h:form>
+				<h:panelGrid columns="3">						
+
+					<h:outputText value="Name" />
+					<h:inputText id="pName" value="#{createFishItemBean.newProvider.name}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}" >						
+					</h:inputText>
+					<h:message for="pName" />
+
+					<h:outputText value="Email" />
+					<h:inputText id="pEmail" value="#{createFishItemBean.newProvider.email}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regEmailInvalid}">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:message for="pEmail" />
+
+					<h:outputText value="Telephone" />
+					<h:inputText id="pTelephone" value="#{createFishItemBean.newProvider.telephone}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regTelephoneInvalid}">
+						<f:validateRegex pattern="[0-9-+()]{1,18}" />
+					</h:inputText>
+					<h:message for="pTelephone" />					
+
+				</h:panelGrid>
+				<h:commandButton value="Submit"
+					action="#{createFishItemBean.registerProvider()}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Shipment</ui:define>
+		<ui:define name="content">
+			#{parcelShipmentBean.updateAvaliableList()}
+			
+			<h2>Register shipments</h2>
+
+			<h:dataTable value="#{parcelShipmentBean.avaliableForShipment}" var="parcel"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Id</f:facet> 
+					#{parcel.id}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Customer</f:facet> 
+					#{parcel.customer.name} #{parcel.customer.surname}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Weight</f:facet> 
+					#{parcel.getTotalWeight()} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Price</f:facet> 
+					#{parcel.getTotalPrice()}
+				</h:column>				
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Ship" rendered="#{parcelShipmentBean.checkAvaliability(parcel)}"
+							action="#{parcelShipmentBean.shipParcel(parcel)}" />
+							
+						<h:commandButton value="Cancel order" rendered="#{!parcelShipmentBean.checkAvaliability(parcel)}"
+							action="#{parcelShipmentBean.cancelParcelShipment(parcel)}" />
+					</h:form>
+				</h:column>
+				
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

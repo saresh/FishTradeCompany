@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Home page</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="content">
+		#{createFishItemBean.updateProvidersList()}
+			<h2>Register new fish item</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+				
+					<h:outputText value="Provider: " />
+					<h:selectOneMenu id="pid" value="#{createFishItemBean.providerId}">
+						<f:selectItems value="#{createFishItemBean.providersList}" />
+					</h:selectOneMenu>						
+					<h:link value="Add new provider" outcome="newProvider"/>	
+
+					<h:outputText value="Name" />
+					<h:inputText id="fName" value="#{createFishItemBean.fishItem.name}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}" >						
+					</h:inputText>
+					<h:message for="fName" />
+
+					<h:outputText value="Description" />
+					<h:inputTextarea id="fDesc" value="#{createFishItemBean.fishItem.description}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}">						
+					</h:inputTextarea>
+					<h:message for="fDesc" />
+
+					<h:outputText value="Quantity bought" />
+					<h:inputText id="fQBought" value="#{createFishItemBean.fishItem.quantityBought}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.fishQuantityBoughtInvalid}">
+						<f:convertNumber/>
+					</h:inputText>
+					<h:message for="fQBought" />
+
+					<h:outputText value="Price paid for ton" />
+					<h:inputText id="fPPF" value="#{createFishItemBean.fishItem.pricePaidFor}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.fishPriceBoughtInvalid}">
+						<f:convertNumber/>
+					</h:inputText>
+					<h:message for="fPPF" />
+
+				</h:panelGrid>
+				<h:commandButton value="Submit"
+					action="#{createFishItemBean.registerFishItem()}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

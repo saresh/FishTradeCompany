@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="title">Sign up</ui:define>
+		<ui:define name="content">
+			<h2>Sign up</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputText value="Username"/>
+					<h:inputText id="uUsername" value="#{signUpBean.username}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regUsernameInvalid}">
+						<f:validateLength minimum="4" maximum="30"/>
+						<f:validateRegex pattern="[a-zA-Z0-9]{4,30}"/>
+					</h:inputText>
+					<h:message for="uUsername"/>
+					<h:outputText value="Password"></h:outputText>
+					<h:inputSecret id="pass" value="#{signUpBean.password}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regPasswordInvalid}" >
+						<f:validateLength minimum="4" mmaximum="40"/>
+					</h:inputSecret>
+					<h:message for="pass"/>
+					<h:outputText value="Name"></h:outputText>
+					<h:inputText id="uName" value="#{signUpBean.name}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regNameInvalid}">
+						<f:validateLength maximum="40"/>
+						<f:validateRegex pattern="[a-zA-Z]{1,40}"/>
+					</h:inputText>
+					<h:message for="uName"/>
+					<h:outputText value="Surname"></h:outputText>
+					<h:inputText id="uSurname" value="#{signUpBean.surname}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regSurnameInvalid}">
+						<f:validateLength maximum="40"/>
+						<f:validateRegex pattern="[a-zA-Z]{1,40}"/>
+					</h:inputText>
+					<h:message for="uSurname"/>
+					<h:outputText value="Email"></h:outputText>
+					<h:inputText id="uEmail" value="#{signUpBean.email}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regEmailInvalid}">
+						<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:message for="uEmail"/>
+					<h:outputText value="Telephone"></h:outputText>
+					<h:inputText id="uTelephone" value="#{signUpBean.telephone}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}" validatorMessage="#{msgs.regTelephoneInvalid}">
+						<f:validateRegex pattern="[0-9-+()]{1,18}"/>
+					</h:inputText>
+					<h:message for="uTelephone"/>
+					<h:outputText value="Date of birth"></h:outputText>
+					<h:inputText id="uBD" value="#{signUpBean.maturity}" converterMessage="#{msgs.regBirthDateInvalid}">
+						<f:convertDateTime pattern="dd.MM.yyyy"/>
+					</h:inputText>
+					<h:message for="uBD"/>
+				</h:panelGrid>
+				<h:commandButton value="Sign up" action="#{signUpBean.signUp()}"></h:commandButton>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

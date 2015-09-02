@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="title">Cart</ui:define>
+		<ui:define name="content">
+			<h2>Your cart</h2>
+
+			<h:dataTable value="#{purchaseBean.cart}" var="parcelItem"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Name</f:facet> 
+					#{parcelItem.fishItem.name} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Description</f:facet> 
+					#{parcelItem.fishItem.description} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantity</f:facet> 
+					#{parcelItem.quantity} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Price</f:facet> 
+					#{parcelItem.price * parcelItem.quantity} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Remove"
+							action="#{purchaseBean.removeFromCart(parcelItem)}" />
+					</h:form>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Edit"
+							action="#{purchaseBean.editCartItem(parcelItem)}" />
+					</h:form>
+				</h:column>
+
+			</h:dataTable>
+			
+			<p>
+				Total weight: #{purchaseBean.getTotalWeight()} tons <br />
+				Total price: $#{purchaseBean.getTotalPrice()}			
+			</p>
+
+			<h:form rendered="#{!purchaseBean.cart.isEmpty() and customerLoginBean.user != null}">
+				<h:commandButton value="Send Order" styleClass="button"
+					action="#{purchaseBean.sendOrder(customerLoginBean.customer)}" />
+			</h:form>
+			<h:form rendered="#{(customerLoginBean.customer == null) and !purchaseBean.cart.isEmpty()}">
+				<h:link value="Login"	outcome="customerLogin" />
+				<h:outputText value=" or "/>
+				<h:link value="sign up" outcome="signup" />
+				<h:outputText value=" to send the order"/>
+			</h:form>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

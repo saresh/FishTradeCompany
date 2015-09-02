@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/BasicTemplate.xhtml">
+		<ui:define name="title">Parcels</ui:define>
+		<ui:define name="content">
+			#{customerParcelBean.refreshList(customerLoginBean.customer)}
+			
+			<h2>Your parcels</h2>
+			
+			<h:dataTable value="#{customerParcelBean.customerParcels}" var="parcel"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Status</f:facet> 
+					#{parcel.status} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Order Date</f:facet> 
+					#{parcel.orderDate} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Weight</f:facet> 
+					#{parcel.getTotalWeight()} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Price</f:facet> 
+					#{parcel.getTotalPrice()} 
+				</h:column>		
+
+			</h:dataTable>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Home page</title>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="content">
+			<h2>Register new staff account</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+
+					<h:outputText value="Username" />
+					<h:inputText id="uUsername" value="#{staffRegisterBean.username}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regUsernameInvalid}">
+						<f:validateLength minimum="4" maximum="30" />
+						<f:validateRegex pattern="[a-zA-Z0-9]{4,30}" />
+					</h:inputText>
+					<h:message for="uUsername" />
+
+					<h:outputText value="Password" />
+					<h:inputSecret id="pass" value="#{staffRegisterBean.password}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regPasswordInvalid}">
+						<f:validateLength minimum="4" mmaximum="40" />
+					</h:inputSecret>
+					<h:message for="pass" />
+
+					<h:outputText value="Name" />
+					<h:inputText id="uName" value="#{staffRegisterBean.name}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regNameInvalid}">
+						<f:validateLength maximum="40" />
+						<f:validateRegex pattern="[a-zA-Z]{1,40}" />
+					</h:inputText>
+					<h:message for="uName" />
+
+					<h:outputText value="Surname" />
+					<h:inputText id="uSurname" value="#{staffRegisterBean.surname}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regSurnameInvalid}">
+						<f:validateLength maximum="40" />
+						<f:validateRegex pattern="[a-zA-Z]{1,40}" />
+					</h:inputText>
+					<h:message for="uSurname" />
+
+					<h:outputText value="Email" />
+					<h:inputText id="uEmail" value="#{staffRegisterBean.email}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regEmailInvalid}">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:message for="uEmail" />
+
+					<h:outputText value="Telephone" />
+					<h:inputText id="uTelephone" value="#{staffRegisterBean.telephone}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.regTelephoneInvalid}">
+						<f:validateRegex pattern="[0-9-+()]{1,18}" />
+					</h:inputText>
+					<h:message for="uTelephone" />
+
+					<h:outputText value="Date of birth" />
+					<h:inputText id="uBD" value="#{staffRegisterBean.maturity}"
+						converterMessage="#{msgs.dateFormatInvalid}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="uBD" />
+
+					<h:outputText value="Role" />
+					<h:selectOneMenu value="#{staffRegisterBean.staffRole}">
+						<f:selectItems value="#{staffRegisterBean.staffRoles}" />
+					</h:selectOneMenu>
+					<h:outputText value=""/>
+
+				</h:panelGrid>
+				<h:commandButton value="Register" 
+					action="#{staffRegisterBean.registerStaff()}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

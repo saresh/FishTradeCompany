@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Aug 13 21:57:05 EEST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014f-286c-3160-000002d1da78 
+on database directory C:\Users\saresh\BIONICPROJECT with class loader sun.misc.Launcher$AppClassLoader@c387f44 
+Loaded from file:/C:/Users/saresh/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_51-b16
+user.dir=C:\Java\Workspaces\bionic\FishTradeCompany
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

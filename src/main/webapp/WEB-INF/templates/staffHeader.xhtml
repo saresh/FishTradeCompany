@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+	<ui:composition>
+		<div class="header">
+			<div class="header-row">
+				<div class="logo-holder">
+					<img src="../resources/img/logo2.png" class="logo"/>
+				</div>
+				<div class="menu-holder">
+					<ui:fragment
+						rendered="#{staffLoginBean.staff.staffRole == 'Security officer'}">
+						<ul class="main-menu">
+							<li><h:link value="Register staff account"
+									outcome="/so/registerStaffAccount" /></li>
+							<li><h:link value="Manage accounts"
+									outcome="/so/editStaffAccounts" /></li>							
+						</ul>
+					</ui:fragment>
+					
+					<ui:fragment
+						rendered="#{staffLoginBean.staff.staffRole == 'General manager'}">
+						<ul class="main-menu">
+							<li><h:link value="Register new fish"
+									outcome="/gm/newFishItem" /></li>
+							<li><h:link value="Manage fish"
+									outcome="/gm/manageReceivedFish" /></li>
+							<li><h:link value="Manage customers"
+									outcome="/gm/manageCustomers" /></li>
+							<li><h:link value="Reports"
+									outcome="/gm/totalReport" /></li>														
+						</ul>
+					</ui:fragment>
+					
+					<ui:fragment
+						rendered="#{staffLoginBean.staff.staffRole == 'Cold store manager'}">
+						<ul class="main-menu">
+							<li><h:link value="Register new arrival"
+									outcome="/csm/newParcelArrival" /></li>							
+							<li><h:link value="Shipment"
+									outcome="/csm/shipment" /></li>
+							<li><h:link value="Write-off"
+									outcome="/csm/writeOff" /></li>														
+						</ul>
+					</ui:fragment>
+					
+					<ui:fragment
+						rendered="#{staffLoginBean.staff.staffRole == 'Accountant'}">
+						<ul class="main-menu">
+							<li><h:link value="Parcels pending payments"
+									outcome="/accountant/manageParcelPayments" /></li>	
+							<li><h:link value="Paid parcels"
+									outcome="/accountant/managePaidParcels" /></li>																				
+						</ul>
+					</ui:fragment>
+				</div>
+				<div class="user-holder">
+					<h:form rendered="#{staffLoginBean.user != null}">
+						You are logged as #{staffLoginBean.username}
+						<br />
+						<h:commandLink value="Logout" action="#{staffLoginBean.logout}" />
+					</h:form>
+
+				</div>
+
+
+			</div>
+		</div>
+	</ui:composition>
+
+</h:body>
+</html>

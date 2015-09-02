@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Edit fish item</ui:define>
+		<ui:define name="content">
+			<h2>Edit fish item</h2>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputText value="Name" />
+					<h:inputText id="fName"
+						value="#{manageFishItemsBean.itemToEdit.name}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}">
+					</h:inputText>
+					<h:message for="fName" />
+
+					<h:outputText value="Description" />
+					<h:inputTextarea id="fDesc"
+						value="#{manageFishItemsBean.itemToEdit.description}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}">
+					</h:inputTextarea>
+					<h:message for="fDesc" />
+
+					<h:outputText value="Price for ton" />
+					<h:inputText id="fPFT"
+						value="#{manageFishItemsBean.itemToEdit.price}" required="true"
+						requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.fishPriceBoughtInvalid}">
+						<f:convertNumber />
+					</h:inputText>
+					<h:message for="fPFT" />
+					
+					<h:outputText value="Quantity" />
+					<h:outputText id="fQ" value="#{manageFishItemsBean.itemToEdit.quantity}" />
+					<h:message for="fQ" />
+
+					<h:outputText value="Quantity bought" />
+					<h:inputText id="fQBought"
+						value="#{manageFishItemsBean.itemToEdit.quantityBought}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.fishQuantityBoughtInvalid}">
+						<f:convertNumber />
+					</h:inputText>
+					<h:message for="fQBought" />
+
+					<h:outputText value="Price paid for ton" />
+					<h:inputText id="fPPF"
+						value="#{manageFishItemsBean.itemToEdit.pricePaidFor}"
+						required="true" requiredMessage="#{msgs.regFieldRequired}"
+						validatorMessage="#{msgs.fishPriceBoughtInvalid}">
+						<f:convertNumber />
+					</h:inputText>
+					<h:message for="fPPF" />
+
+				</h:panelGrid>
+				<h:commandButton value="Save"
+					action="#{manageFishItemsBean.updateFishItem()}" />
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

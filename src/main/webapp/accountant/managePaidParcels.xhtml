@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" target="head" />
+</h:head>
+<h:body>
+	<ui:composition template="../WEB-INF/templates/StaffTemplate.xhtml">
+		<ui:define name="title">Paid parcels</ui:define>
+		<ui:define name="content">
+			#{accountantBean.updateReadyForShipmentStatusList()}
+			
+			<h2>Paid and ready for shipment</h2>
+			
+			<h:dataTable value="#{accountantBean.readyForShipmentStatus}" var="parcel"
+				styleClass="table" headerClass="tableHeader"
+				rowClasses="tableRow, tableRow">
+
+				<h:column>
+					<f:facet name="header">Id</f:facet> 
+					#{parcel.id} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Customer</f:facet> 
+					#{parcel.customer.name} #{parcel.customer.surname} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Status</f:facet> 
+					#{parcel.status} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Total price</f:facet> 
+					#{parcel.getTotalPrice()} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Paid</f:facet> 
+					#{parcel.getTotalPaymentsAmount()} 
+				</h:column>	
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton value="Set avaliable for shipment" 
+							action="#{accountantBean.setAvaliableForShipment(parcel)}" />
+					</h:form>
+				</h:column>	
+
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
